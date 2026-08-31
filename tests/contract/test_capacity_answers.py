@@ -33,10 +33,19 @@ def _load_fixture() -> dict:
         return yaml.safe_load(handle)
 
 
-def _first_number(text: str) -> float:
-    match = re.search(r"[-+]?\d*\.?\d+", text)
-    assert match, f"no number found in answer text: {text!r}"
-    return float(match.group())
+def _contains_number_within_tolerance(text: str, target: float, tolerance: float) -> bool:
+    """Return True if a number in text falls within the tolerance band around target.
+
+    A correct answer also states the duration and arrival-rate inputs it started from, and
+    usually ends with the margin-rounded worker count - so the raw calculated value the fixture
+    checks for is rarely the first or the last number in the string. Accepting a match anywhere
+    avoids penalizing a correctly-computed answer for showing its work.
+    """
+    lower = target * (1 - tolerance)
+    upper = target * (1 + tolerance)
+    numbers = re.findall(r"[-+]?\d*\.?\d+", text)
+    assert numbers, f"no number found in answer text: {text!r}"
+    return any(lower <= float(match) <= upper for match in numbers)
 
 
 def test_worker_count_calculation_within_tolerance() -> None:
@@ -48,10 +57,8 @@ def test_worker_count_calculation_within_tolerance() -> None:
     arrival = fixture["peak_exception_arrival_at_10x_jobs_per_sec"]
     expected_workers = (duration * arrival) * 1.3  # 30% safety margin, per the lesson
 
-    submitted = _first_number(submission["answers"]["worker_count_calc"])
-    lower = expected_workers * (1 - TOLERANCE)
-    upper = expected_workers * (1 + TOLERANCE)
-    assert lower <= submitted <= upper, (
-        f"worker_count_calc={submitted} is outside the ±{TOLERANCE:.0%} tolerance band around "
-        f"the expected {expected_workers:.2f} (duration={duration} x arrival={arrival} x 1.3)"
+    answer_text = submission["answers"]["worker_count_calc"]
+    assert _contains_number_within_tolerance(answer_text, expected_workers, TOLERANCE), (
+        f"worker_count_calc does not contain a number within +/-{TOLERANCE:.0%} of the expected "
+        f"{expected_workers:.2f} (duration={duration} x arrival={arrival} x 1.3): {answer_text!r}"
     )

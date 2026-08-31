@@ -119,8 +119,7 @@ poe start
 
 poe verify
   -> readiness
-  -> smoke tests
-  -> end-to-end workflow
+  -> capacity-answer checks
   -> answer and protected-path checks
 ```
 
