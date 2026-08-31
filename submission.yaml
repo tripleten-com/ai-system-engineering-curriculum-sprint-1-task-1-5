@@ -1,0 +1,34 @@
+# Coldline - Task 1.5
+# File: submission.yaml
+# Component: Student answer sheet
+# Purpose: Record the Task 1.5 capacity review correction and scaling ADR.
+# Interacts With: Submission schema and public verifier
+# Sprint/Task: Sprint 1 - Project 1 / Task 1.5
+# Concepts: Capacity math, Architecture Decision Records
+# Tools: YAML
+
+# Complete each answer after auditing the AI-generated capacity report and correcting its 10x
+# scale calculations with explicit units.
+# Empty values and placeholder text fail public verification.
+# Do not submit secrets, personal data, local absolute paths, or protected evaluator details.
+# See submission-sample.yaml for a completed fictional shape.
+answers:
+  # 200-2000 characters.
+  claim_audit: |
+    Replace this line with your claim-by-claim audit of the AI capacity report.
+  # 40-500 characters.
+  ingestion_rate_calc: |
+    Replace this line with your corrected 10x ingestion-rate calculation.
+  # 40-500 characters.
+  exception_rate_calc: |
+    Replace this line with your corrected 10x exception-rate calculation.
+  # 40-500 characters.
+  worker_count_calc: |
+    Replace this line with your worker-count calculation, showing the required number of workers.
+  # 100-1000 characters.
+  scaling_recommendation: |
+    Replace this line with your single, bounded scaling recommendation.
+  # 300-2000 characters. Must mention Context, Decision, Consequences, Alternatives Considered,
+  # Action Trigger, Rollback Condition, and Next Measurement.
+  adr: |
+    Replace this line with your Architecture Decision Record.

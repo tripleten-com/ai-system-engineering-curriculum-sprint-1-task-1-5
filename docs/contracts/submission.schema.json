@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["answers"],
+  "properties": {
+    "answers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_audit",
+        "ingestion_rate_calc",
+        "exception_rate_calc",
+        "worker_count_calc",
+        "scaling_recommendation",
+        "adr"
+      ],
+      "properties": {
+        "claim_audit": { "type": "string", "minLength": 200, "maxLength": 2000 },
+        "ingestion_rate_calc": { "type": "string", "minLength": 40, "maxLength": 500 },
+        "exception_rate_calc": { "type": "string", "minLength": 40, "maxLength": 500 },
+        "worker_count_calc": { "type": "string", "minLength": 40, "maxLength": 500 },
+        "scaling_recommendation": { "type": "string", "minLength": 100, "maxLength": 1000 },
+        "adr": { "type": "string", "minLength": 300, "maxLength": 2000 }
+      }
+    }
+  }
+}

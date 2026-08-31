@@ -1,0 +1,52 @@
+# Coldline - Task 1.5
+# File: submission-sample.yaml
+# Component: Fictional answer example
+# Purpose: Show the required answer shape without giving Task answers.
+# Interacts With: Submission schema and public verifier
+# Sprint/Task: Sprint 1 - Project 1 / Task 1.5
+# Concepts: Evidence structure
+# Tools: YAML
+
+# Fictional shape example only. These answers do not describe Coldline. All figures below are
+# fictional and independent of the real docs/student/task-1-4-reference-metrics.yaml fixture.
+answers:
+  claim_audit: |
+    Fictional Claim 1 (Factual): the fictional worker consumes messages from fictional Redis
+    Streams. Marked Supported after checking the fictional queue adapter code. Fictional Claim 2
+    (Calculated): fictional 10x ingestion reaches 18,000,000 fictional MB per hour. Marked
+    Calculation Error: the fictional draft multiplied fictional bytes per second by fictional
+    seconds per hour without converting bytes to megabytes first, overstating the fictional figure
+    by a factor of one million. Fictional Claim 3 (Judgment): migrate to a fictional multi-region
+    Kubernetes cluster with a fictional service mesh. Marked Unsupported Assumption: the fictional
+    load test evidence points only to fictional worker concurrency saturating, never to a fictional
+    multi-region requirement.
+  ingestion_rate_calc: |
+    At fictional 10x scale, ingestion is 10 fictional readings/sec x 500 fictional bytes/reading =
+    5,000 fictional bytes/sec, or 5,000 x 3,600 / 1,000,000 = 18 fictional MB/hour, not the
+    fictional draft's 18,000,000 MB/hour.
+  exception_rate_calc: |
+    Fictional baseline exception rate is 5 percent of 2 fictional shipments/sec = 0.1 fictional
+    jobs/sec. At fictional 10x scale, arrival becomes 0.1 x 10 = 1.0 fictional jobs/sec entering
+    the fictional queue.
+  worker_count_calc: |
+    Using a fictional worker task duration of 0.35 fictional sec/job and a fictional peak arrival
+    of 10 fictional jobs/sec at 10x scale: 0.35 x 10 = 3.5 fictional concurrent workers. Adding a
+    30 percent fictional safety margin: ceil(3.5 x 1.3) = ceil(4.55) = 5 fictional worker processes.
+  scaling_recommendation: |
+    Scale the fictional exception worker pool from 2 to 5 fictional processes to absorb the
+    fictional 10x peak exception rate with a fictional safety margin, rather than adopting the
+    fictional draft's fictional multi-region Kubernetes migration, which is not supported by any
+    fictional measured bottleneck.
+  adr: |
+    Context: fictional leadership approved a fictional 10x shipment expansion, and the fictional
+    Task 1.4 load test found fictional worker concurrency saturating before any other fictional
+    resource. Decision: scale the fictional exception worker pool from 2 to 5 fictional processes.
+    Consequences: fictional infrastructure cost rises modestly and fictional operational
+    complexity stays low, though the fictional database connection pool will need monitoring as
+    concurrency grows. Alternatives Considered: a fictional multi-region Kubernetes migration was
+    rejected as unsupported by any fictional measured bottleneck and needlessly fictional
+    expensive. Action Trigger: scale up when the fictional Redis Streams backlog exceeds 50
+    fictional messages for more than 2 fictional minutes. Rollback Condition: revert to 2 fictional
+    processes if fictional database CPU exceeds 85 percent or the fictional error rate exceeds 1
+    percent. Next Measurement: monitor fictional worker queue backlog and fictional database
+    connection pool utilization after the change.
