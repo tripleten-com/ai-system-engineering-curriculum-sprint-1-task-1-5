@@ -1,4 +1,4 @@
-"""Coldline — Task 1.5.
+"""Coldline.
 
 ===================
 
@@ -7,7 +7,7 @@ Component:         Contract — Capacity answers
 Purpose:           Check submitted capacity-math answers against the shipped fixture, with
                     tolerance.
 Interacts With:    submission.yaml, docs/student/task-1-4-reference-metrics.yaml
-Sprint/Task:       Sprint 1 — Project 1 / Task 1.5
+Sprint/Task:       Sprint 1 — Project 1
 Concepts:          Tolerance-based automated grading
 Tools:             Python 3.12, pytest, PyYAML
 """
