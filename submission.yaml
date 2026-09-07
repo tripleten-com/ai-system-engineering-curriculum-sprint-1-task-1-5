@@ -51,6 +51,7 @@ answers:
   # - limit-to-reversible-local-pilot: Limit the recommendation to a local experiment that can be
   #   rolled back.
   # - retain-as-planning-assumption: Retain the statement explicitly as a planning assumption.
+  # For overlapping descriptions, apply the classification order in docs/student/evidence-guide.md.
   claim_audit:
     # C01: The historical 0.29 seconds is pure worker service time.
     # Source: docs/student/ai-capacity-report-draft.md, C01.

@@ -1,6 +1,19 @@
 # Task 1.5 supplied evidence
 
-Audit each C01-C10 claim in [the draft](ai-capacity-report-draft.md) against [evidence-pack.json](evidence-pack.json). Every claim requires its own classification, a correction from the pack's correction_choices, and the required evidence ID set; select the exact number specified for that claim. `measurement-definition-error` is a metric being relabeled as a different quantity. `calculation-error` concerns units, arithmetic or the supplied formula. `unsupported-assumption` lacks evidence.
+Audit each C01-C10 claim in [the draft](ai-capacity-report-draft.md) against [evidence-pack.json](evidence-pack.json). Every claim requires its own classification, a correction from the pack's correction_choices, and the required evidence ID set; select the exact number specified for that claim.
+
+Classify the defect using this order when descriptions overlap: a measured quantity
+relabeled as another quantity is a `measurement-definition-error`; otherwise an
+incorrect unit conversion, computation, arithmetic identity, or application of the
+supplied formula is a `calculation-error`; otherwise a conclusion or relationship
+without supporting evidence is an `unsupported-assumption`. A claim established by
+the supplied records or explicitly identified as a planning input is `supported`.
+
+Each evidence selection must support the correction, not merely share its topic.
+For a claim that confuses throughput with capacity, cover both the original metric's
+meaning and the limits on inferring capacity. Either a relevant capture's stated
+limits or the runtime/fidelity record can establish those limits. The exact selection
+count still applies; additional unrelated citations do not strengthen an answer.
 
 Select the correction method that fixes the claim, or retain the claim when the pack establishes it as a planning assumption. The numeric correction values belong in the named calculation fields in Step 2.
 

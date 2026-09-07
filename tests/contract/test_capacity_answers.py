@@ -22,19 +22,36 @@ from pathlib import Path
 
 import pytest
 import yaml
+from jsonschema import Draft202012Validator
 
-from tests.contract.submission_validation import validate_submission
+from tests.contract.submission_validation import _load_one_document, _validate_values
 
 pytestmark = pytest.mark.runtime
 
 
 def test_capacity_calculations_have_explicit_structured_fields() -> None:
-    """Reject prose and incomplete calculation fields through the public schema."""
-    validate_submission(
-        Path("submission.yaml"),
-        Path("docs/contracts/submission.schema.json"),
-        sample_path=Path("submission-sample.yaml"),
-    )
+    """Validate Step 2 independently; final `answers` still checks the whole sheet."""
+    validate_calculation_fields(Path("submission.yaml"))
+
+
+def validate_calculation_fields(submission: Path) -> None:
+    """Use the same field schemas without requiring answers from later steps."""
+    data = _load_one_document(submission)
+    schema = json.loads(Path("docs/contracts/submission.schema.json").read_text())
+    fields = ("ingestion_rate_calc", "exception_rate_calc", "storage_calc", "worker_count_calc")
+    answers = data.get("answers", {})
+    selected = {name: answers.get(name) for name in fields}
+    _validate_values(selected, "answers")
+    focused = {
+        **schema,
+        "type": "object",
+        "properties": {
+            name: schema["properties"]["answers"]["properties"][name] for name in fields
+        },
+        "required": list(fields),
+        "additionalProperties": False,
+    }
+    Draft202012Validator(focused).validate(selected)
 
 
 def test_capacity_arithmetic_is_internally_consistent() -> None:
