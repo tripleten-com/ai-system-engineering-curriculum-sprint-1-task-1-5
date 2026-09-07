@@ -1,163 +1,358 @@
 # Coldline - Task 1.5
 # File: submission.yaml
-# Complete the structured answers from docs/student/evidence-pack.json.
-# Nulls are intentionally incomplete. Live investigations are required practical work
-# and evidence for instructor defense; fixed-pack values answer this assessed case.
-# See submission-sample.yaml for a fictional completed shape.
+# Edit only answer values in submission.yaml; keep the supplied keys and types.
+# Empty strings, nulls, and placeholder text are incomplete and fail verification.
+# Use submission-sample.yaml for YAML formatting only; do not copy its fictional values.
+# Do not include secrets, personal data, or local absolute paths.
+# Use docs/student/evidence-pack.json for assessed answers; retain your required local
+# investigations for the final defense.
+
 answers:
+
+  # Task 1.5 — Step 1: Analyzing AI-generated capacity reviews
+  # Review claims C01-C10 in docs/student/ai-capacity-report-draft.md. For each claim, classify its
+  # accuracy, select the required evidence records, and choose its correction or retention option.
+  # The quoted statements are claims to assess, not trusted findings.
+  # Source: docs/student/evidence-pack.json; guidance: docs/student/evidence-guide.md.
+  #
+  # classification options (use exact values):
+  # - supported: The supplied evidence supports the claim as written.
+  # - calculation-error: The arithmetic, unit conversion, or use of the supplied formula is
+  #   incorrect.
+  # - measurement-definition-error: The claim treats a measurement as a different quantity from the
+  #   one it measures.
+  # - unsupported-assumption: The claim relies on an assumption that the supplied evidence does not
+  #   establish.
+  #
+  # evidence_ids options (use exact values):
+  # - E51: Current baseline worker processing-span counts and duration sums.
+  # - E52: Historical two-user capture and its measurement definitions.
+  # - E53: Authored workload inputs and storage units.
+  # - E54: Authored pilot policy and operating thresholds.
+  # - E55: Runtime topology and fidelity description.
+  # - E56: Definitions for component and end-to-end percentiles.
+  #
+  # correction options (use exact values):
+  # - use-accepted-to-terminal-duration: Describe the interval from acceptance to persistence of the
+  #   terminal state.
+  # - use-common-cutoff-outstanding-counts: Use accepted and terminal job counts taken at the same
+  #   cutoff.
+  # - separate-acceptance-completion-capacity: Distinguish incoming acceptance rate, completed-job
+  #   rate, and capacity.
+  # - convert-bytes-to-decimal-mb: Convert bytes to decimal megabytes using 1000000 bytes per MB.
+  # - multiply-arrival-by-exception-fraction: Multiply the reading arrival rate by the fraction that
+  #   creates exceptions.
+  # - multiply-daily-storage-by-retention-days: Multiply daily raw storage by the number of retained
+  #   days.
+  # - apply-margin-once-then-ceiling: Apply the planning margin once, then round upward once to an
+  #   integer.
+  # - measure-correlated-end-to-end-percentile: Measure complete correlated request durations to
+  #   obtain their percentile.
+  # - limit-to-reversible-local-pilot: Limit the recommendation to a local experiment that can be
+  #   rolled back.
+  # - retain-as-planning-assumption: Retain the statement explicitly as a planning assumption.
   claim_audit:
+    # C01: The historical 0.29 seconds is pure worker service time.
+    # Source: docs/student/ai-capacity-report-draft.md, C01.
     C01:
-      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      # Claim classification: choose one string from classification options above.
       classification: null
-      # Choose 1 unique selections; order does not matter.
-      # Allowed values: E51, E52, E53, E54, E55, E56.
+      # Evidence: list of exactly 1 ID from evidence_ids options above; no duplicates.
       evidence_ids: null
-      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      # Correction or retention method: choose one string from correction options above.
       correction: null
+    # C02: Historical XLEN values 44 and 45 prove unfinished-job backlog.
+    # Source: docs/student/ai-capacity-report-draft.md, C02.
     C02:
-      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      # Claim classification: choose one string from classification options above.
       classification: null
-      # Choose 1 unique selections; order does not matter.
-      # Allowed values: E51, E52, E53, E54, E55, E56.
+      # Evidence: list of exactly 1 ID from evidence_ids options above; no duplicates.
       evidence_ids: null
-      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      # Correction or retention method: choose one string from correction options above.
       correction: null
+    # C03: 1.53 API requests/second is completed-worker throughput and maximum capacity.
+    # Source: docs/student/ai-capacity-report-draft.md, C03.
     C03:
-      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      # Claim classification: choose one string from classification options above.
       classification: null
-      # Choose 2 unique selections; order does not matter.
-      # Allowed values: E51, E52, E53, E54, E55, E56.
+      # Evidence: list of exactly 2 IDs from evidence_ids options above; no duplicates.
       evidence_ids: null
-      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      # Correction or retention method: choose one string from correction options above.
       correction: null
+    # C04: At the supplied 10x sensor rate, 500 bytes x 1000 readings/second gives 1800000000
+    # MB/hour.
+    # Source: docs/student/ai-capacity-report-draft.md, C04.
     C04:
-      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      # Claim classification: choose one string from classification options above.
       classification: null
-      # Choose 1 unique selections; order does not matter.
-      # Allowed values: E51, E52, E53, E54, E55, E56.
+      # Evidence: list of exactly 1 ID from evidence_ids options above; no duplicates.
       evidence_ids: null
-      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      # Correction or retention method: choose one string from correction options above.
       correction: null
+    # C05: At 1000 readings/second and an exception fraction of 0.012, arrival is 120 jobs/second.
+    # Source: docs/student/ai-capacity-report-draft.md, C05.
     C05:
-      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      # Claim classification: choose one string from classification options above.
       classification: null
-      # Choose 1 unique selections; order does not matter.
-      # Allowed values: E51, E52, E53, E54, E55, E56.
+      # Evidence: list of exactly 1 ID from evidence_ids options above; no duplicates.
       evidence_ids: null
-      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      # Correction or retention method: choose one string from correction options above.
       correction: null
+    # C06: Seven days of raw readings require 43.2 GB total storage.
+    # Source: docs/student/ai-capacity-report-draft.md, C06.
     C06:
-      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      # Claim classification: choose one string from classification options above.
       classification: null
-      # Choose 1 unique selections; order does not matter.
-      # Allowed values: E51, E52, E53, E54, E55, E56.
+      # Evidence: list of exactly 1 ID from evidence_ids options above; no duplicates.
       evidence_ids: null
-      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      # Correction or retention method: choose one string from correction options above.
       correction: null
+    # C07: Required workers = ceil(ceil(arrival x service) x 1.3 x 1.3).
+    # Source: docs/student/ai-capacity-report-draft.md, C07.
     C07:
-      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      # Claim classification: choose one string from classification options above.
       classification: null
-      # Choose 2 unique selections; order does not matter.
-      # Allowed values: E51, E52, E53, E54, E55, E56.
+      # Evidence: list of exactly 2 IDs from evidence_ids options above; no duplicates.
       evidence_ids: null
-      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      # Correction or retention method: choose one string from correction options above.
       correction: null
+    # C08: API p95 + worker p95 always equals end-to-end p95.
+    # Source: docs/student/ai-capacity-report-draft.md, C08.
     C08:
-      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      # Claim classification: choose one string from classification options above.
       classification: null
-      # Choose 1 unique selections; order does not matter.
-      # Allowed values: E51, E52, E53, E54, E55, E56.
+      # Evidence: list of exactly 1 ID from evidence_ids options above; no duplicates.
       evidence_ids: null
-      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      # Correction or retention method: choose one string from correction options above.
       correction: null
+    # C09: These local runs justify immediate multi-region Kubernetes, a service mesh and a managed
+    # multi-region stream.
+    # Source: docs/student/ai-capacity-report-draft.md, C09.
     C09:
-      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      # Claim classification: choose one string from classification options above.
       classification: null
-      # Choose 2 unique selections; order does not matter.
-      # Allowed values: E51, E52, E53, E54, E55, E56.
+      # Evidence: list of exactly 2 IDs from evidence_ids options above; no duplicates.
       evidence_ids: null
-      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      # Correction or retention method: choose one string from correction options above.
       correction: null
+    # C10: The 10x arrival rate is an authored planning assumption, not a measured 10x run.
+    # Source: docs/student/ai-capacity-report-draft.md, C10.
     C10:
-      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      # Claim classification: choose one string from classification options above.
       classification: null
-      # Choose 1 unique selections; order does not matter.
-      # Allowed values: E51, E52, E53, E54, E55, E56.
+      # Evidence: list of exactly 1 ID from evidence_ids options above; no duplicates.
       evidence_ids: null
-      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      # Correction or retention method: choose one string from correction options above.
       correction: null
+
+  # Task 1.5 — Step 2: 10x scale projections and resource math
+  # Calculate projected reading ingestion and byte volume from the supplied workload inputs.
+  # Source: docs/student/evidence-pack.json; guidance: docs/student/evidence-guide.md.
   ingestion_rate_calc:
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Supplied baseline sensor arrival rate, in readings per second.
+    # Number; absolute tolerance 0.001 in the named unit or factor.
     baseline_readings_per_second: null
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Supplied workload multiplier, expressed as a factor rather than a percentage.
+    # Number; absolute tolerance 0.001 in the named unit or factor.
     growth_factor: null
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Projected sensor arrival rate after applying growth, in readings per second.
+    # Number; absolute tolerance 0.001 in the named unit or factor.
     projected_readings_per_second: null
-    # integer; units are part of the field name. See the evidence guide for precision.
+    # Raw payload size, in bytes per reading.
+    # Integer; the count must match exactly.
     payload_bytes_per_reading: null
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Projected incoming raw payload volume, in bytes per second.
+    # Number; absolute tolerance 0.001 in the named unit or factor.
     ingestion_bytes_per_second: null
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Projected incoming raw payload volume, in decimal MB per hour (1 MB = 1000000 bytes).
+    # Number; absolute tolerance 0.001 in the named unit or factor.
     ingestion_mb_per_hour: null
+
+  # Task 1.5 — Step 2: 10x scale projections and resource math
+  # Calculate the projected arrival rate of exception jobs from the supplied reading rate and
+  # exception fraction.
+  # Source: docs/student/evidence-pack.json; guidance: docs/student/evidence-guide.md.
   exception_rate_calc:
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Projected sensor arrival rate after applying growth, in readings per second.
+    # Number; absolute tolerance 0.001 in the named unit or factor.
     projected_readings_per_second: null
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Fraction of readings that create exception jobs, expressed between 0 and 1.
+    # Number; absolute tolerance 0.000001 in the named unit or factor.
     exception_fraction: null
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Projected exception arrival rate, in jobs per second.
+    # Number; absolute tolerance 0.001 in the named unit or factor.
     arrival_jobs_per_second: null
+
+  # Task 1.5 — Step 2: 10x scale projections and resource math
+  # Estimate retained storage from the supplied byte rate and retention inputs; identify the scope
+  # of that estimate.
+  # Source: docs/student/evidence-pack.json; guidance: docs/student/evidence-guide.md.
+  #
+  # scope options (use exact values):
+  # - raw-payload-only-excludes-indexes-replication-and-overhead: Estimate raw payload storage,
+  #   excluding indexes, replicas, and other overhead.
+  # - fully-provisioned-production-storage: Treat the estimate as the full storage provision
+  #   required for production.
   storage_calc:
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Projected incoming raw payload volume, in bytes per second.
+    # Number; absolute tolerance 0.001 in the named unit or factor.
     ingestion_bytes_per_second: null
-    # integer; units are part of the field name. See the evidence guide for precision.
+    # Number of days of raw readings to retain.
+    # Integer; the count must match exactly.
     retention_days: null
-    # integer; units are part of the field name. See the evidence guide for precision.
+    # Number of seconds used to convert one day.
+    # Integer; the count must match exactly.
     seconds_per_day: null
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Raw payload volume retained over the specified period, in bytes.
+    # Number; absolute tolerance 0.001 in the named unit or factor.
     retained_bytes: null
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Retained volume, in decimal GB (1 GB = 1000000000 bytes).
+    # Number; absolute tolerance 0.001 in the named unit or factor.
     retained_decimal_gb: null
-    # Choose one: raw-payload-only-excludes-indexes-replication-and-overhead, fully-provisioned-production-storage.
+    # Select the scope of this estimate or recommendation.
+    # Choose one string from the scope options above.
     scope: null
+
+  # Task 1.5 — Step 2: 10x scale projections and resource math
+  # Record the service input, projected arrival rate, intermediate worker estimates, final count,
+  # and calculation choices.
+  # Source: docs/student/evidence-pack.json; guidance: docs/student/evidence-guide.md.
+  #
+  # rounding options (use exact values):
+  # - ceil-once-after-one-margin: Apply one margin and then round upward to an integer once.
+  # - ceil-before-margin: Round upward before applying the margin.
+  # - round-nearest: Round to the nearest integer worker count.
+  #
+  # input_basis options (use exact values):
+  # - pooled-worker-service-spans: Use total worker processing-span duration divided by the total
+  #   span count.
+  # - accepted-to-terminal-duration: Use elapsed time between acceptance and persistence of the
+  #   terminal state.
+  # - configured-delay-only: Use the provider delay setting as the service-time input.
   worker_count_calc:
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Supplied pooled worker processing duration, in seconds per job; round to six decimals.
+    # Number; absolute tolerance 0.000001 seconds/job.
     service_seconds_per_job: null
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Projected exception arrival rate, in jobs per second.
+    # Number; absolute tolerance 0.001 in the named unit or factor.
     arrival_jobs_per_second: null
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Modeled worker demand before applying a margin or integer rounding.
+    # Number; absolute tolerance 0.0001 workers.
     unmargined_workers: null
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Planning margin as a fraction; for example, a percentage is divided by 100.
+    # Number; absolute tolerance 0.000001 in the named unit or factor.
     margin_fraction: null
-    # number; units are part of the field name. See the evidence guide for precision.
+    # Modeled worker demand after applying the margin, before integer rounding.
+    # Number; absolute tolerance 0.0001 workers.
     with_margin_workers: null
-    # integer; units are part of the field name. See the evidence guide for precision.
+    # Final whole-number worker count.
+    # Integer; the count must match exactly.
     required_workers: null
-    # Choose one: ceil-once-after-one-margin, ceil-before-margin, round-nearest.
+    # Select the method used to round the worker estimate.
+    # Choose one string from the rounding options above.
     rounding: null
-    # Choose one: pooled-worker-service-spans, accepted-to-terminal-duration, configured-delay-only.
+    # Select the evidence basis for the worker service-time input.
+    # Choose one string from the input_basis options above.
     input_basis: null
+
+  # Task 1.5 — Step 3: Authoring a structured architectural decision record
+  # Recommend an action and scope using the supplied operating policy; select exactly four evidence
+  # records.
+  # Source: docs/student/evidence-pack.json; guidance: docs/student/evidence-guide.md.
+  #
+  # action options (use exact values):
+  # - two-worker-pilot: Test a local configuration with two workers.
+  # - admission-control-pilot: Test a local policy that limits or rejects incoming work.
+  # - multi-region-platform-migration: Migrate the platform to infrastructure spanning multiple
+  #   regions.
+  #
+  # scope options (use exact values):
+  # - bounded-local-pilot-before-production-decision: Gather results from a limited local pilot
+  #   before deciding on production changes.
+  # - immediate-production-rollout: Proceed directly to a production rollout.
+  #
+  # evidence_ids options (use exact values):
+  # - E51: Current baseline worker processing-span counts and duration sums.
+  # - E52: Historical two-user capture and its measurement definitions.
+  # - E53: Authored workload inputs and storage units.
+  # - E54: Authored pilot policy and operating thresholds.
+  # - E55: Runtime topology and fidelity description.
+  # - E56: Definitions for component and end-to-end percentiles.
   scaling_recommendation:
-    # Choose one: two-worker-pilot, admission-control-pilot, multi-region-platform-migration.
+    # Select the recommended action.
+    # Choose one string from the action options above.
     action: null
-    # Choose one: bounded-local-pilot-before-production-decision, immediate-production-rollout.
+    # Select the scope of this estimate or recommendation.
+    # Choose one string from the scope options above.
     scope: null
-    # Choose 4 unique selections; order does not matter.
-    # Allowed values: E51, E52, E53, E54, E55, E56.
+    # Select the evidence records supporting this answer.
+    # YAML list: choose 4 unique values from the evidence_ids options above; order does not matter.
     evidence_ids: null
+
+  # Task 1.5 — Step 3: Authoring a structured architectural decision record
+  # Complete the architectural decision record: context, decision, alternatives, consequence,
+  # trigger, rollback condition, and next measurement. Use the supplied operating policy to keep the
+  # selected decision and its conditions consistent.
+  # Source: docs/student/evidence-pack.json; guidance: docs/student/evidence-guide.md.
+  #
+  # context options (use exact values):
+  # - projected-load-exceeds-one-worker-model: The projected workload exceeds the capacity estimated
+  #   for one worker.
+  # - cloud-capacity-already-proven: Cloud capacity has already been established by the evidence.
+  #
+  # decision / alternatives options (use exact values):
+  # - two-worker-pilot: Test a local configuration with two workers.
+  # - admission-control-pilot: Test a local policy that limits or rejects incoming work.
+  # - multi-region-platform-migration: Migrate the platform to infrastructure spanning multiple
+  #   regions.
+  #
+  # consequences options (use exact values):
+  # - duplicate-and-database-contention-risk: Risk of repeated side effects and competing database
+  #   operations.
+  # - admission-delay-and-rejection-risk: Risk of delayed or rejected incoming requests.
+  # - production-capacity-guaranteed: The decision guarantees sufficient production capacity.
+  #
+  # action_trigger options (use exact values):
+  # - projected-utilization-above-one: Projected offered load divided by modeled one-worker capacity
+  #   exceeds 1.
+  # - actual-arrivals-above-one-worker-modeled-rate: Observed arrival rate exceeds modeled
+  #   one-worker service capacity.
+  # - local-api-p95-below-one-second: The local API 95th-percentile latency is below one second.
+  #
+  # rollback_condition options (use exact values):
+  # - duplicate-side-effects-or-db-p95-over-200ms: Roll back if duplicate side effects occur or
+  #   database p95 exceeds 200 ms.
+  # - rejection-over-1-percent-or-oldest-age-over-60s: Roll back if rejection exceeds 1% or oldest
+  #   outstanding work exceeds 60 seconds.
+  # - never-rollback: Do not roll back under any condition.
+  #
+  # next_measurement options (use exact values):
+  # - two-worker-completions-queue-age-db-p95-duplicates: Measure completion rate, oldest
+  #   outstanding age, database p95, and duplicate effects with two workers.
+  # - admission-rejections-queue-age-completions: Measure admission rejections, oldest outstanding
+  #   age, and completion rate.
+  # - cloud-sla-from-local-runtime: Derive a cloud service-level guarantee from local runtime
+  #   results.
   adr:
-    # Choose one: projected-load-exceeds-one-worker-model, cloud-capacity-already-proven.
+    # Select the situation motivating the decision.
+    # Choose one string from the context options above.
     context: null
-    # Choose one: two-worker-pilot, admission-control-pilot, multi-region-platform-migration.
+    # Select the action recorded in the architectural decision record.
+    # Choose one string from the decision / alternatives options above.
     decision: null
-    # Choose 2 unique selections; order does not matter.
-    # Allowed values: two-worker-pilot, admission-control-pilot, multi-region-platform-migration.
+    # Select the two alternatives considered alongside the decision.
+    # YAML list: choose 2 unique values from the decision / alternatives options above; order does
+    # not matter.
     alternatives: null
-    # Choose 1 unique selections; order does not matter.
-    # Allowed values: duplicate-and-database-contention-risk, admission-delay-and-rejection-risk, production-capacity-guaranteed.
+    # Select one consequence of the chosen decision.
+    # YAML list: choose 1 unique value from the consequences options above; order does not matter.
     consequences: null
-    # Choose one: projected-utilization-above-one, actual-arrivals-above-one-worker-modeled-rate, local-api-p95-below-one-second.
+    # Select the condition that triggers the chosen action.
+    # Choose one string from the action_trigger options above.
     action_trigger: null
-    # Choose one: duplicate-side-effects-or-db-p95-over-200ms, rejection-over-1-percent-or-oldest-age-over-60s, never-rollback.
+    # Select the condition for reversing the chosen action.
+    # Choose one string from the rollback_condition options above.
     rollback_condition: null
-    # Choose one: two-worker-completions-queue-age-db-p95-duplicates, admission-rejections-queue-age-completions, cloud-sla-from-local-runtime.
+    # Select the measurement to take next.
+    # Choose one string from the next_measurement options above.
     next_measurement: null
