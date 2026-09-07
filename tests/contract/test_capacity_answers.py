@@ -3,62 +3,92 @@
 ===================
 
 File:              tests/contract/test_capacity_answers.py
-Component:         Contract — Capacity answers
-Purpose:           Check submitted capacity-math answers against the shipped fixture, with
-                    tolerance.
-Interacts With:    submission.yaml, docs/student/task-1-4-reference-metrics.yaml
-Sprint/Task:       Sprint 1 — Project 1
-Concepts:          Tolerance-based automated grading
-Tools:             Python 3.12, pytest, PyYAML
+Component:         Capacity calculation contract
+Purpose:           Verify structured inputs and published calculation rules.
+Interacts With:    submission.yaml and the supplied evidence pack
+Sprint/Task:       Sprint 1 - Project 1 / Task 1.5
+Concepts:          Units, arithmetic, margin and rounding
+Tools:             Python 3.12, pytest
+
+Public calculation structure; protected assessment checks semantic correctness.
+
+Numbers embedded in prose are not calculation evidence. The public schema requires
+named input, intermediate, unit and rounding fields without exposing an answer key.
 """
 
-import re
+import json
+import math
 from pathlib import Path
 
 import pytest
 import yaml
 
+from tests.contract.submission_validation import validate_submission
+
 pytestmark = pytest.mark.runtime
 
-TOLERANCE = 0.05
 
-
-def _load_submission() -> dict:
-    with Path("submission.yaml").open() as handle:
-        return yaml.safe_load(handle)
-
-
-def _load_fixture() -> dict:
-    with Path("docs/student/task-1-4-reference-metrics.yaml").open() as handle:
-        return yaml.safe_load(handle)
-
-
-def _contains_number_within_tolerance(text: str, target: float, tolerance: float) -> bool:
-    """Return True if a number in text falls within the tolerance band around target.
-
-    A correct answer also states the duration and arrival-rate inputs it started from, and
-    usually ends with the margin-rounded worker count - so the raw calculated value the fixture
-    checks for is rarely the first or the last number in the string. Accepting a match anywhere
-    avoids penalizing a correctly-computed answer for showing its work.
-    """
-    lower = target * (1 - tolerance)
-    upper = target * (1 + tolerance)
-    numbers = re.findall(r"[-+]?\d*\.?\d+", text)
-    assert numbers, f"no number found in answer text: {text!r}"
-    return any(lower <= float(match) <= upper for match in numbers)
-
-
-def test_worker_count_calculation_within_tolerance() -> None:
-    """The submitted worker count must fall within tolerance of the fixture-derived value."""
-    submission = _load_submission()
-    fixture = _load_fixture()
-
-    duration = fixture["worker_task_duration_seconds"]
-    arrival = fixture["peak_exception_arrival_at_10x_jobs_per_sec"]
-    expected_workers = (duration * arrival) * 1.3  # 30% safety margin, per the lesson
-
-    answer_text = submission["answers"]["worker_count_calc"]
-    assert _contains_number_within_tolerance(answer_text, expected_workers, TOLERANCE), (
-        f"worker_count_calc does not contain a number within +/-{TOLERANCE:.0%} of the expected "
-        f"{expected_workers:.2f} (duration={duration} x arrival={arrival} x 1.3): {answer_text!r}"
+def test_capacity_calculations_have_explicit_structured_fields() -> None:
+    """Reject prose and incomplete calculation fields through the public schema."""
+    validate_submission(
+        Path("submission.yaml"),
+        Path("docs/contracts/submission.schema.json"),
+        sample_path=Path("submission-sample.yaml"),
     )
+
+
+def test_capacity_arithmetic_is_internally_consistent() -> None:
+    """Check visible formulas without publishing the protected completed answers."""
+    test_capacity_calculations_have_explicit_structured_fields()
+    answers = yaml.safe_load(Path("submission.yaml").read_text(encoding="utf-8"))["answers"]
+    pack = json.loads(Path("docs/student/evidence-pack.json").read_text(encoding="utf-8"))
+    units = pack["planning_inputs"]
+    ingestion = answers["ingestion_rate_calc"]
+    exceptions = answers["exception_rate_calc"]
+    storage = answers["storage_calc"]
+    workers = answers["worker_count_calc"]
+
+    def equal(actual: float, expected: float, tolerance: float = 0.001) -> None:
+        assert actual == pytest.approx(expected, rel=0, abs=tolerance)
+
+    equal(
+        ingestion["projected_readings_per_second"],
+        ingestion["baseline_readings_per_second"] * ingestion["growth_factor"],
+    )
+    equal(
+        ingestion["ingestion_bytes_per_second"],
+        ingestion["projected_readings_per_second"] * ingestion["payload_bytes_per_reading"],
+    )
+    equal(
+        ingestion["ingestion_mb_per_hour"],
+        ingestion["ingestion_bytes_per_second"]
+        * units["seconds_per_hour"]
+        / units["bytes_per_decimal_mb"],
+    )
+    equal(exceptions["projected_readings_per_second"], ingestion["projected_readings_per_second"])
+    equal(
+        exceptions["arrival_jobs_per_second"],
+        exceptions["projected_readings_per_second"] * exceptions["exception_fraction"],
+    )
+    equal(storage["ingestion_bytes_per_second"], ingestion["ingestion_bytes_per_second"])
+    equal(storage["seconds_per_day"], units["seconds_per_day"])
+    equal(
+        storage["retained_bytes"],
+        storage["ingestion_bytes_per_second"]
+        * storage["seconds_per_day"]
+        * storage["retention_days"],
+    )
+    equal(storage["retained_decimal_gb"], storage["retained_bytes"] / units["bytes_per_decimal_gb"])
+    equal(workers["arrival_jobs_per_second"], exceptions["arrival_jobs_per_second"])
+    equal(
+        workers["unmargined_workers"],
+        workers["arrival_jobs_per_second"] * workers["service_seconds_per_job"],
+        0.0001,
+    )
+    equal(workers["margin_fraction"], units["margin_fraction"], 0.000001)
+    equal(
+        workers["with_margin_workers"],
+        workers["unmargined_workers"] * (1 + workers["margin_fraction"]),
+        0.0001,
+    )
+    assert workers["required_workers"] == math.ceil(workers["with_margin_workers"])

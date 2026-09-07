@@ -1,52 +1,160 @@
 # Coldline - Task 1.5
 # File: submission-sample.yaml
-# Component: Fictional answer example
-# Purpose: Show the required answer shape without giving Task answers.
-# Interacts With: Submission schema and public verifier
-# Sprint/Task: Sprint 1 - Project 1 / Task 1.5
-# Concepts: Evidence structure
-# Tools: YAML
-
-# Fictional shape example only. These answers do not describe Coldline. All figures below are
-# fictional and independent of the real docs/student/task-1-4-reference-metrics.yaml fixture.
+# Fictional shape example only; values do not answer the supplied case.
 answers:
-  claim_audit: |
-    Fictional Claim 1 (Factual): the fictional worker consumes messages from fictional Redis
-    Streams. Marked Supported after checking the fictional queue adapter code. Fictional Claim 2
-    (Calculated): fictional 10x ingestion reaches 18,000,000 fictional MB per hour. Marked
-    Calculation Error: the fictional draft multiplied fictional bytes per second by fictional
-    seconds per hour without converting bytes to megabytes first, overstating the fictional figure
-    by a factor of one million. Fictional Claim 3 (Judgment): migrate to a fictional multi-region
-    Kubernetes cluster with a fictional service mesh. Marked Unsupported Assumption: the fictional
-    load test evidence points only to fictional worker concurrency saturating, never to a fictional
-    multi-region requirement.
-  ingestion_rate_calc: |
-    At fictional 10x scale, ingestion is 10 fictional readings/sec x 500 fictional bytes/reading =
-    5,000 fictional bytes/sec, or 5,000 x 3,600 / 1,000,000 = 18 fictional MB/hour, not the
-    fictional draft's 18,000,000 MB/hour.
-  exception_rate_calc: |
-    Fictional baseline exception rate is 5 percent of 2 fictional shipments/sec = 0.1 fictional
-    jobs/sec. At fictional 10x scale, arrival becomes 0.1 x 10 = 1.0 fictional jobs/sec entering
-    the fictional queue.
-  worker_count_calc: |
-    Using a fictional worker task duration of 0.35 fictional sec/job and a fictional peak arrival
-    of 10 fictional jobs/sec at 10x scale: 0.35 x 10 = 3.5 fictional concurrent workers. Adding a
-    30 percent fictional safety margin: ceil(3.5 x 1.3) = ceil(4.55) = 5 fictional worker processes.
-  scaling_recommendation: |
-    Scale the fictional exception worker pool from 2 to 5 fictional processes to absorb the
-    fictional 10x peak exception rate with a fictional safety margin, rather than adopting the
-    fictional draft's fictional multi-region Kubernetes migration, which is not supported by any
-    fictional measured bottleneck.
-  adr: |
-    Context: fictional leadership approved a fictional 10x shipment expansion, and the fictional
-    Task 1.4 load test found fictional worker concurrency saturating before any other fictional
-    resource. Decision: scale the fictional exception worker pool from 2 to 5 fictional processes.
-    Consequences: fictional infrastructure cost rises modestly and fictional operational
-    complexity stays low, though the fictional database connection pool will need monitoring as
-    concurrency grows. Alternatives Considered: a fictional multi-region Kubernetes migration was
-    rejected as unsupported by any fictional measured bottleneck and needlessly fictional
-    expensive. Action Trigger: scale up when the fictional Redis Streams backlog exceeds 50
-    fictional messages for more than 2 fictional minutes. Rollback Condition: revert to 2 fictional
-    processes if fictional database CPU exceeds 85 percent or the fictional error rate exceeds 1
-    percent. Next Measurement: monitor fictional worker queue backlog and fictional database
-    connection pool utilization after the change.
+  claim_audit:
+    C01:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: "unsupported-assumption"
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: ["E56"]
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: "convert-bytes-to-decimal-mb"
+    C02:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: "unsupported-assumption"
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: ["E56"]
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: "multiply-arrival-by-exception-fraction"
+    C03:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: "unsupported-assumption"
+      # Choose 2 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: ["E56", "E51"]
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: "multiply-daily-storage-by-retention-days"
+    C04:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: "unsupported-assumption"
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: ["E56"]
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: "apply-margin-once-then-ceiling"
+    C05:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: "unsupported-assumption"
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: ["E56"]
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: "measure-correlated-end-to-end-percentile"
+    C06:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: "unsupported-assumption"
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: ["E56"]
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: "limit-to-reversible-local-pilot"
+    C07:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: "unsupported-assumption"
+      # Choose 2 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: ["E56", "E51"]
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: "retain-as-planning-assumption"
+    C08:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: "unsupported-assumption"
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: ["E56"]
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: "use-accepted-to-terminal-duration"
+    C09:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: "unsupported-assumption"
+      # Choose 2 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: ["E56", "E51"]
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: "use-common-cutoff-outstanding-counts"
+    C10:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: "unsupported-assumption"
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: ["E56"]
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: "separate-acceptance-completion-capacity"
+  ingestion_rate_calc:
+    # number; units are part of the field name. See the evidence guide for precision.
+    baseline_readings_per_second: 7
+    # number; units are part of the field name. See the evidence guide for precision.
+    growth_factor: 7
+    # number; units are part of the field name. See the evidence guide for precision.
+    projected_readings_per_second: 7
+    # integer; units are part of the field name. See the evidence guide for precision.
+    payload_bytes_per_reading: 7
+    # number; units are part of the field name. See the evidence guide for precision.
+    ingestion_bytes_per_second: 7
+    # number; units are part of the field name. See the evidence guide for precision.
+    ingestion_mb_per_hour: 7
+  exception_rate_calc:
+    # number; units are part of the field name. See the evidence guide for precision.
+    projected_readings_per_second: 7
+    # number; units are part of the field name. See the evidence guide for precision.
+    exception_fraction: 1
+    # number; units are part of the field name. See the evidence guide for precision.
+    arrival_jobs_per_second: 7
+  storage_calc:
+    # number; units are part of the field name. See the evidence guide for precision.
+    ingestion_bytes_per_second: 7
+    # integer; units are part of the field name. See the evidence guide for precision.
+    retention_days: 7
+    # integer; units are part of the field name. See the evidence guide for precision.
+    seconds_per_day: 7
+    # number; units are part of the field name. See the evidence guide for precision.
+    retained_bytes: 7
+    # number; units are part of the field name. See the evidence guide for precision.
+    retained_decimal_gb: 7
+    # Choose one: raw-payload-only-excludes-indexes-replication-and-overhead, fully-provisioned-production-storage.
+    scope: "fully-provisioned-production-storage"
+  worker_count_calc:
+    # number; units are part of the field name. See the evidence guide for precision.
+    service_seconds_per_job: 7
+    # number; units are part of the field name. See the evidence guide for precision.
+    arrival_jobs_per_second: 7
+    # number; units are part of the field name. See the evidence guide for precision.
+    unmargined_workers: 7
+    # number; units are part of the field name. See the evidence guide for precision.
+    margin_fraction: 1
+    # number; units are part of the field name. See the evidence guide for precision.
+    with_margin_workers: 7
+    # integer; units are part of the field name. See the evidence guide for precision.
+    required_workers: 7
+    # Choose one: ceil-once-after-one-margin, ceil-before-margin, round-nearest.
+    rounding: "round-nearest"
+    # Choose one: pooled-worker-service-spans, accepted-to-terminal-duration, configured-delay-only.
+    input_basis: "configured-delay-only"
+  scaling_recommendation:
+    # Choose one: two-worker-pilot, admission-control-pilot, multi-region-platform-migration.
+    action: "multi-region-platform-migration"
+    # Choose one: bounded-local-pilot-before-production-decision, immediate-production-rollout.
+    scope: "immediate-production-rollout"
+    # Choose 4 unique selections; order does not matter.
+    # Allowed values: E51, E52, E53, E54, E55, E56.
+    evidence_ids: ["E55", "E56", "E51", "E52"]
+  adr:
+    # Choose one: projected-load-exceeds-one-worker-model, cloud-capacity-already-proven.
+    context: "cloud-capacity-already-proven"
+    # Choose one: two-worker-pilot, admission-control-pilot, multi-region-platform-migration.
+    decision: "multi-region-platform-migration"
+    # Choose 2 unique selections; order does not matter.
+    # Allowed values: two-worker-pilot, admission-control-pilot, multi-region-platform-migration.
+    alternatives: ["multi-region-platform-migration", "two-worker-pilot"]
+    # Choose 1 unique selections; order does not matter.
+    # Allowed values: duplicate-and-database-contention-risk, admission-delay-and-rejection-risk, production-capacity-guaranteed.
+    consequences: ["production-capacity-guaranteed"]
+    # Choose one: projected-utilization-above-one, actual-arrivals-above-one-worker-modeled-rate, local-api-p95-below-one-second.
+    action_trigger: "local-api-p95-below-one-second"
+    # Choose one: duplicate-side-effects-or-db-p95-over-200ms, rejection-over-1-percent-or-oldest-age-over-60s, never-rollback.
+    rollback_condition: "never-rollback"
+    # Choose one: two-worker-completions-queue-age-db-p95-duplicates, admission-rejections-queue-age-completions, cloud-sla-from-local-runtime.
+    next_measurement: "cloud-sla-from-local-runtime"

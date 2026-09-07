@@ -69,7 +69,7 @@ poe verify
 | `poe capacity-answers` | Check capacity calculations against the supplied reference measurements |
 | `poe load-test` | Run this repository's supplied traffic profile |
 | `poe reset-baseline` | Clear exception and Redis data, then restart the worker between load runs |
-| `poe restart` | Restart API and worker processes |
+| `poe restart` | Restart the existing API and worker containers **without rebuilding**; run `poe start` instead after editing source |
 | `poe stop` | Remove containers and the network, keeping named volumes |
 | `poe reset` | Remove containers, the network, and local named volumes |
 
@@ -153,29 +153,34 @@ runtime evidence rather than from this guide.
 
 ## Task boundary
 
-Task 1.5 asks you to audit a flawed, AI-generated 10x capacity report claim by claim, correct its
-scaling math with explicit units, and author an Architecture Decision Record (ADR) that recommends
-one bounded scaling action. This Task is read-only for application code — you add only new answer
-content.
+Audit the supplied AI report, correct its 10x calculations with explicit units, and complete one structured decision record for a bounded scaling action.
 
 Only these paths are student-editable:
 
 - `submission.yaml`
 
-The public verifier checks answer structure, completeness, and that your corrected worker-count
-calculation is within tolerance of the measured `docs/student/task-1-4-reference-metrics.yaml`
-fixture. It cannot grade engineering judgment. The instructor reviews the quality of the claim
-audit, the scaling recommendation, and the ADR.
+Read [the evidence guide](docs/student/evidence-guide.md) and the versioned
+[fixed evidence pack](docs/student/evidence-pack.json) before completing `submission.yaml`.
+The sheet and its fictional sample show exact objects, values, and units. Graded
+analysis comes from this supplied pack; actual local investigations remain required
+and provide evidence for the final instructor defense. Keep those sources distinct.
+
+The public verifier checks answer structure, permitted changes, and the Task's
+published runtime behavior and public arithmetic checks. Protected automated answer
+checks establish semantic correctness against the public fixed pack. These protected
+answer checks are distinct from the single Task 1.6 held-out runtime scenario.
+Deterministic CI accepts Task
+answers; there is no separate instructor Task-answer grade. Green required public and protected CI opens
+the next Task. Sprint completion requires all six Task PRs CI-green and one final
+instructor defense covering empirical reasoning, uncertainty, alternatives, and judgment.
 
 ### Student walkthrough
 
-See **Task 1.5: Capacity Review Correction** in your course platform for the full walkthrough. In outline: read `docs/student/ai-capacity-report-draft.md` and classify
-every major claim as supported, a calculation error, or an unsupported assumption; recompute the
-10x ingestion rate, exception rate, and worker count with explicit units, using the real Task 1.4
-measurements in `docs/student/task-1-4-reference-metrics.yaml`; propose one bounded, cost-effective
-scaling recommendation; write an ADR covering Context, Decision, Consequences, Alternatives
-Considered, Action Trigger, Rollback Condition, and Next Measurement; run `poe verify`; then record
-all of it in `submission.yaml`.
+Read `docs/student/ai-capacity-report-draft.md`, `docs/student/task-1-4-reference-metrics.yaml`, and the fixed evidence guide. Complete the claim audit, ingestion/exception/storage/worker calculations, scaling recommendation, and structured ADR. Distinguish supplied reference measurement conditions from your own earlier load experiments; explain their differences in the final defense.
+
+Run `./.tools/bin/uv run --frozen poe verify` from the repository root before
+submitting a feature-branch PR against `main`. See the course Task lesson for the
+three-Step walkthrough and exact matching acceptance/self-review criteria.
 
 ## Operational limits
 

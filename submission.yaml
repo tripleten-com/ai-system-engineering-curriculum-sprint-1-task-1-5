@@ -1,34 +1,163 @@
 # Coldline - Task 1.5
 # File: submission.yaml
-# Component: Student answer sheet
-# Purpose: Record the Task 1.5 capacity review correction and scaling ADR.
-# Interacts With: Submission schema and public verifier
-# Sprint/Task: Sprint 1 - Project 1 / Task 1.5
-# Concepts: Capacity math, Architecture Decision Records
-# Tools: YAML
-
-# Complete each answer after auditing the AI-generated capacity report and correcting its 10x
-# scale calculations with explicit units.
-# Empty values and placeholder text fail public verification.
-# Do not submit secrets, personal data, local absolute paths, or protected evaluator details.
-# See submission-sample.yaml for a completed fictional shape.
+# Complete the structured answers from docs/student/evidence-pack.json.
+# Nulls are intentionally incomplete. Live investigations are required practical work
+# and evidence for instructor defense; fixed-pack values answer this assessed case.
+# See submission-sample.yaml for a fictional completed shape.
 answers:
-  # 200-2000 characters.
-  claim_audit: |
-    Replace this line with your claim-by-claim audit of the AI capacity report.
-  # 40-500 characters.
-  ingestion_rate_calc: |
-    Replace this line with your corrected 10x ingestion-rate calculation.
-  # 40-500 characters.
-  exception_rate_calc: |
-    Replace this line with your corrected 10x exception-rate calculation.
-  # 40-500 characters.
-  worker_count_calc: |
-    Replace this line with your worker-count calculation, showing the required number of workers.
-  # 100-1000 characters.
-  scaling_recommendation: |
-    Replace this line with your single, bounded scaling recommendation.
-  # 300-2000 characters. Must mention Context, Decision, Consequences, Alternatives Considered,
-  # Action Trigger, Rollback Condition, and Next Measurement.
-  adr: |
-    Replace this line with your Architecture Decision Record.
+  claim_audit:
+    C01:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: null
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: null
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: null
+    C02:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: null
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: null
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: null
+    C03:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: null
+      # Choose 2 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: null
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: null
+    C04:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: null
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: null
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: null
+    C05:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: null
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: null
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: null
+    C06:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: null
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: null
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: null
+    C07:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: null
+      # Choose 2 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: null
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: null
+    C08:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: null
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: null
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: null
+    C09:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: null
+      # Choose 2 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: null
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: null
+    C10:
+      # Choose one: supported, calculation-error, measurement-definition-error, unsupported-assumption.
+      classification: null
+      # Choose 1 unique selections; order does not matter.
+      # Allowed values: E51, E52, E53, E54, E55, E56.
+      evidence_ids: null
+      # Choose one: use-accepted-to-terminal-duration, use-common-cutoff-outstanding-counts, separate-acceptance-completion-capacity, convert-bytes-to-decimal-mb, multiply-arrival-by-exception-fraction, multiply-daily-storage-by-retention-days, apply-margin-once-then-ceiling, measure-correlated-end-to-end-percentile, limit-to-reversible-local-pilot, retain-as-planning-assumption.
+      correction: null
+  ingestion_rate_calc:
+    # number; units are part of the field name. See the evidence guide for precision.
+    baseline_readings_per_second: null
+    # number; units are part of the field name. See the evidence guide for precision.
+    growth_factor: null
+    # number; units are part of the field name. See the evidence guide for precision.
+    projected_readings_per_second: null
+    # integer; units are part of the field name. See the evidence guide for precision.
+    payload_bytes_per_reading: null
+    # number; units are part of the field name. See the evidence guide for precision.
+    ingestion_bytes_per_second: null
+    # number; units are part of the field name. See the evidence guide for precision.
+    ingestion_mb_per_hour: null
+  exception_rate_calc:
+    # number; units are part of the field name. See the evidence guide for precision.
+    projected_readings_per_second: null
+    # number; units are part of the field name. See the evidence guide for precision.
+    exception_fraction: null
+    # number; units are part of the field name. See the evidence guide for precision.
+    arrival_jobs_per_second: null
+  storage_calc:
+    # number; units are part of the field name. See the evidence guide for precision.
+    ingestion_bytes_per_second: null
+    # integer; units are part of the field name. See the evidence guide for precision.
+    retention_days: null
+    # integer; units are part of the field name. See the evidence guide for precision.
+    seconds_per_day: null
+    # number; units are part of the field name. See the evidence guide for precision.
+    retained_bytes: null
+    # number; units are part of the field name. See the evidence guide for precision.
+    retained_decimal_gb: null
+    # Choose one: raw-payload-only-excludes-indexes-replication-and-overhead, fully-provisioned-production-storage.
+    scope: null
+  worker_count_calc:
+    # number; units are part of the field name. See the evidence guide for precision.
+    service_seconds_per_job: null
+    # number; units are part of the field name. See the evidence guide for precision.
+    arrival_jobs_per_second: null
+    # number; units are part of the field name. See the evidence guide for precision.
+    unmargined_workers: null
+    # number; units are part of the field name. See the evidence guide for precision.
+    margin_fraction: null
+    # number; units are part of the field name. See the evidence guide for precision.
+    with_margin_workers: null
+    # integer; units are part of the field name. See the evidence guide for precision.
+    required_workers: null
+    # Choose one: ceil-once-after-one-margin, ceil-before-margin, round-nearest.
+    rounding: null
+    # Choose one: pooled-worker-service-spans, accepted-to-terminal-duration, configured-delay-only.
+    input_basis: null
+  scaling_recommendation:
+    # Choose one: two-worker-pilot, admission-control-pilot, multi-region-platform-migration.
+    action: null
+    # Choose one: bounded-local-pilot-before-production-decision, immediate-production-rollout.
+    scope: null
+    # Choose 4 unique selections; order does not matter.
+    # Allowed values: E51, E52, E53, E54, E55, E56.
+    evidence_ids: null
+  adr:
+    # Choose one: projected-load-exceeds-one-worker-model, cloud-capacity-already-proven.
+    context: null
+    # Choose one: two-worker-pilot, admission-control-pilot, multi-region-platform-migration.
+    decision: null
+    # Choose 2 unique selections; order does not matter.
+    # Allowed values: two-worker-pilot, admission-control-pilot, multi-region-platform-migration.
+    alternatives: null
+    # Choose 1 unique selections; order does not matter.
+    # Allowed values: duplicate-and-database-contention-risk, admission-delay-and-rejection-risk, production-capacity-guaranteed.
+    consequences: null
+    # Choose one: projected-utilization-above-one, actual-arrivals-above-one-worker-modeled-rate, local-api-p95-below-one-second.
+    action_trigger: null
+    # Choose one: duplicate-side-effects-or-db-p95-over-200ms, rejection-over-1-percent-or-oldest-age-over-60s, never-rollback.
+    rollback_condition: null
+    # Choose one: two-worker-completions-queue-age-db-p95-duplicates, admission-rejections-queue-age-completions, cloud-sla-from-local-runtime.
+    next_measurement: null
