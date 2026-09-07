@@ -2,7 +2,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": false,
-  "required": ["answers"],
+  "required": [
+    "answers"
+  ],
   "properties": {
     "answers": {
       "type": "object",
@@ -11,17 +13,882 @@
         "claim_audit",
         "ingestion_rate_calc",
         "exception_rate_calc",
+        "storage_calc",
         "worker_count_calc",
         "scaling_recommendation",
         "adr"
       ],
       "properties": {
-        "claim_audit": { "type": "string", "minLength": 200, "maxLength": 2000 },
-        "ingestion_rate_calc": { "type": "string", "minLength": 40, "maxLength": 500 },
-        "exception_rate_calc": { "type": "string", "minLength": 40, "maxLength": 500 },
-        "worker_count_calc": { "type": "string", "minLength": 40, "maxLength": 500 },
-        "scaling_recommendation": { "type": "string", "minLength": 100, "maxLength": 1000 },
-        "adr": { "type": "string", "minLength": 300, "maxLength": 2000 }
+        "claim_audit": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "C01",
+            "C02",
+            "C03",
+            "C04",
+            "C05",
+            "C06",
+            "C07",
+            "C08",
+            "C09",
+            "C10"
+          ],
+          "properties": {
+            "C01": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "classification",
+                "evidence_ids",
+                "correction"
+              ],
+              "properties": {
+                "classification": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "calculation-error",
+                    "measurement-definition-error",
+                    "unsupported-assumption"
+                  ]
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "E51",
+                      "E52",
+                      "E53",
+                      "E54",
+                      "E55",
+                      "E56"
+                    ]
+                  }
+                },
+                "correction": {
+                  "type": "string",
+                  "enum": [
+                    "use-accepted-to-terminal-duration",
+                    "use-common-cutoff-outstanding-counts",
+                    "separate-acceptance-completion-capacity",
+                    "convert-bytes-to-decimal-mb",
+                    "multiply-arrival-by-exception-fraction",
+                    "multiply-daily-storage-by-retention-days",
+                    "apply-margin-once-then-ceiling",
+                    "measure-correlated-end-to-end-percentile",
+                    "limit-to-reversible-local-pilot",
+                    "retain-as-planning-assumption"
+                  ]
+                }
+              }
+            },
+            "C02": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "classification",
+                "evidence_ids",
+                "correction"
+              ],
+              "properties": {
+                "classification": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "calculation-error",
+                    "measurement-definition-error",
+                    "unsupported-assumption"
+                  ]
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "E51",
+                      "E52",
+                      "E53",
+                      "E54",
+                      "E55",
+                      "E56"
+                    ]
+                  }
+                },
+                "correction": {
+                  "type": "string",
+                  "enum": [
+                    "use-accepted-to-terminal-duration",
+                    "use-common-cutoff-outstanding-counts",
+                    "separate-acceptance-completion-capacity",
+                    "convert-bytes-to-decimal-mb",
+                    "multiply-arrival-by-exception-fraction",
+                    "multiply-daily-storage-by-retention-days",
+                    "apply-margin-once-then-ceiling",
+                    "measure-correlated-end-to-end-percentile",
+                    "limit-to-reversible-local-pilot",
+                    "retain-as-planning-assumption"
+                  ]
+                }
+              }
+            },
+            "C03": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "classification",
+                "evidence_ids",
+                "correction"
+              ],
+              "properties": {
+                "classification": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "calculation-error",
+                    "measurement-definition-error",
+                    "unsupported-assumption"
+                  ]
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "E51",
+                      "E52",
+                      "E53",
+                      "E54",
+                      "E55",
+                      "E56"
+                    ]
+                  }
+                },
+                "correction": {
+                  "type": "string",
+                  "enum": [
+                    "use-accepted-to-terminal-duration",
+                    "use-common-cutoff-outstanding-counts",
+                    "separate-acceptance-completion-capacity",
+                    "convert-bytes-to-decimal-mb",
+                    "multiply-arrival-by-exception-fraction",
+                    "multiply-daily-storage-by-retention-days",
+                    "apply-margin-once-then-ceiling",
+                    "measure-correlated-end-to-end-percentile",
+                    "limit-to-reversible-local-pilot",
+                    "retain-as-planning-assumption"
+                  ]
+                }
+              }
+            },
+            "C04": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "classification",
+                "evidence_ids",
+                "correction"
+              ],
+              "properties": {
+                "classification": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "calculation-error",
+                    "measurement-definition-error",
+                    "unsupported-assumption"
+                  ]
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "E51",
+                      "E52",
+                      "E53",
+                      "E54",
+                      "E55",
+                      "E56"
+                    ]
+                  }
+                },
+                "correction": {
+                  "type": "string",
+                  "enum": [
+                    "use-accepted-to-terminal-duration",
+                    "use-common-cutoff-outstanding-counts",
+                    "separate-acceptance-completion-capacity",
+                    "convert-bytes-to-decimal-mb",
+                    "multiply-arrival-by-exception-fraction",
+                    "multiply-daily-storage-by-retention-days",
+                    "apply-margin-once-then-ceiling",
+                    "measure-correlated-end-to-end-percentile",
+                    "limit-to-reversible-local-pilot",
+                    "retain-as-planning-assumption"
+                  ]
+                }
+              }
+            },
+            "C05": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "classification",
+                "evidence_ids",
+                "correction"
+              ],
+              "properties": {
+                "classification": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "calculation-error",
+                    "measurement-definition-error",
+                    "unsupported-assumption"
+                  ]
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "E51",
+                      "E52",
+                      "E53",
+                      "E54",
+                      "E55",
+                      "E56"
+                    ]
+                  }
+                },
+                "correction": {
+                  "type": "string",
+                  "enum": [
+                    "use-accepted-to-terminal-duration",
+                    "use-common-cutoff-outstanding-counts",
+                    "separate-acceptance-completion-capacity",
+                    "convert-bytes-to-decimal-mb",
+                    "multiply-arrival-by-exception-fraction",
+                    "multiply-daily-storage-by-retention-days",
+                    "apply-margin-once-then-ceiling",
+                    "measure-correlated-end-to-end-percentile",
+                    "limit-to-reversible-local-pilot",
+                    "retain-as-planning-assumption"
+                  ]
+                }
+              }
+            },
+            "C06": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "classification",
+                "evidence_ids",
+                "correction"
+              ],
+              "properties": {
+                "classification": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "calculation-error",
+                    "measurement-definition-error",
+                    "unsupported-assumption"
+                  ]
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "E51",
+                      "E52",
+                      "E53",
+                      "E54",
+                      "E55",
+                      "E56"
+                    ]
+                  }
+                },
+                "correction": {
+                  "type": "string",
+                  "enum": [
+                    "use-accepted-to-terminal-duration",
+                    "use-common-cutoff-outstanding-counts",
+                    "separate-acceptance-completion-capacity",
+                    "convert-bytes-to-decimal-mb",
+                    "multiply-arrival-by-exception-fraction",
+                    "multiply-daily-storage-by-retention-days",
+                    "apply-margin-once-then-ceiling",
+                    "measure-correlated-end-to-end-percentile",
+                    "limit-to-reversible-local-pilot",
+                    "retain-as-planning-assumption"
+                  ]
+                }
+              }
+            },
+            "C07": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "classification",
+                "evidence_ids",
+                "correction"
+              ],
+              "properties": {
+                "classification": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "calculation-error",
+                    "measurement-definition-error",
+                    "unsupported-assumption"
+                  ]
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "E51",
+                      "E52",
+                      "E53",
+                      "E54",
+                      "E55",
+                      "E56"
+                    ]
+                  }
+                },
+                "correction": {
+                  "type": "string",
+                  "enum": [
+                    "use-accepted-to-terminal-duration",
+                    "use-common-cutoff-outstanding-counts",
+                    "separate-acceptance-completion-capacity",
+                    "convert-bytes-to-decimal-mb",
+                    "multiply-arrival-by-exception-fraction",
+                    "multiply-daily-storage-by-retention-days",
+                    "apply-margin-once-then-ceiling",
+                    "measure-correlated-end-to-end-percentile",
+                    "limit-to-reversible-local-pilot",
+                    "retain-as-planning-assumption"
+                  ]
+                }
+              }
+            },
+            "C08": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "classification",
+                "evidence_ids",
+                "correction"
+              ],
+              "properties": {
+                "classification": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "calculation-error",
+                    "measurement-definition-error",
+                    "unsupported-assumption"
+                  ]
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "E51",
+                      "E52",
+                      "E53",
+                      "E54",
+                      "E55",
+                      "E56"
+                    ]
+                  }
+                },
+                "correction": {
+                  "type": "string",
+                  "enum": [
+                    "use-accepted-to-terminal-duration",
+                    "use-common-cutoff-outstanding-counts",
+                    "separate-acceptance-completion-capacity",
+                    "convert-bytes-to-decimal-mb",
+                    "multiply-arrival-by-exception-fraction",
+                    "multiply-daily-storage-by-retention-days",
+                    "apply-margin-once-then-ceiling",
+                    "measure-correlated-end-to-end-percentile",
+                    "limit-to-reversible-local-pilot",
+                    "retain-as-planning-assumption"
+                  ]
+                }
+              }
+            },
+            "C09": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "classification",
+                "evidence_ids",
+                "correction"
+              ],
+              "properties": {
+                "classification": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "calculation-error",
+                    "measurement-definition-error",
+                    "unsupported-assumption"
+                  ]
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "E51",
+                      "E52",
+                      "E53",
+                      "E54",
+                      "E55",
+                      "E56"
+                    ]
+                  }
+                },
+                "correction": {
+                  "type": "string",
+                  "enum": [
+                    "use-accepted-to-terminal-duration",
+                    "use-common-cutoff-outstanding-counts",
+                    "separate-acceptance-completion-capacity",
+                    "convert-bytes-to-decimal-mb",
+                    "multiply-arrival-by-exception-fraction",
+                    "multiply-daily-storage-by-retention-days",
+                    "apply-margin-once-then-ceiling",
+                    "measure-correlated-end-to-end-percentile",
+                    "limit-to-reversible-local-pilot",
+                    "retain-as-planning-assumption"
+                  ]
+                }
+              }
+            },
+            "C10": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "classification",
+                "evidence_ids",
+                "correction"
+              ],
+              "properties": {
+                "classification": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "calculation-error",
+                    "measurement-definition-error",
+                    "unsupported-assumption"
+                  ]
+                },
+                "evidence_ids": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 1,
+                  "uniqueItems": true,
+                  "x-order-independent": true,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "E51",
+                      "E52",
+                      "E53",
+                      "E54",
+                      "E55",
+                      "E56"
+                    ]
+                  }
+                },
+                "correction": {
+                  "type": "string",
+                  "enum": [
+                    "use-accepted-to-terminal-duration",
+                    "use-common-cutoff-outstanding-counts",
+                    "separate-acceptance-completion-capacity",
+                    "convert-bytes-to-decimal-mb",
+                    "multiply-arrival-by-exception-fraction",
+                    "multiply-daily-storage-by-retention-days",
+                    "apply-margin-once-then-ceiling",
+                    "measure-correlated-end-to-end-percentile",
+                    "limit-to-reversible-local-pilot",
+                    "retain-as-planning-assumption"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "ingestion_rate_calc": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "baseline_readings_per_second",
+            "growth_factor",
+            "projected_readings_per_second",
+            "payload_bytes_per_reading",
+            "ingestion_bytes_per_second",
+            "ingestion_mb_per_hour"
+          ],
+          "properties": {
+            "baseline_readings_per_second": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000000000000.0,
+              "x-absolute-tolerance": 0.001
+            },
+            "growth_factor": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000000000000.0,
+              "x-absolute-tolerance": 0.001
+            },
+            "projected_readings_per_second": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000000000000.0,
+              "x-absolute-tolerance": 0.001
+            },
+            "payload_bytes_per_reading": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10000000
+            },
+            "ingestion_bytes_per_second": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000000000000.0,
+              "x-absolute-tolerance": 0.001
+            },
+            "ingestion_mb_per_hour": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000000000000.0,
+              "x-absolute-tolerance": 0.001
+            }
+          }
+        },
+        "exception_rate_calc": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "projected_readings_per_second",
+            "exception_fraction",
+            "arrival_jobs_per_second"
+          ],
+          "properties": {
+            "projected_readings_per_second": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000000000000.0,
+              "x-absolute-tolerance": 0.001
+            },
+            "exception_fraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "x-absolute-tolerance": 1e-06
+            },
+            "arrival_jobs_per_second": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000000000000.0,
+              "x-absolute-tolerance": 0.001
+            }
+          }
+        },
+        "storage_calc": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ingestion_bytes_per_second",
+            "retention_days",
+            "seconds_per_day",
+            "retained_bytes",
+            "retained_decimal_gb",
+            "scope"
+          ],
+          "properties": {
+            "ingestion_bytes_per_second": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000000000000.0,
+              "x-absolute-tolerance": 0.001
+            },
+            "retention_days": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3650
+            },
+            "seconds_per_day": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "retained_bytes": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000000000000.0,
+              "x-absolute-tolerance": 0.001
+            },
+            "retained_decimal_gb": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000000000000.0,
+              "x-absolute-tolerance": 0.001
+            },
+            "scope": {
+              "type": "string",
+              "enum": [
+                "raw-payload-only-excludes-indexes-replication-and-overhead",
+                "fully-provisioned-production-storage"
+              ]
+            }
+          }
+        },
+        "worker_count_calc": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "service_seconds_per_job",
+            "arrival_jobs_per_second",
+            "unmargined_workers",
+            "margin_fraction",
+            "with_margin_workers",
+            "required_workers",
+            "rounding",
+            "input_basis"
+          ],
+          "properties": {
+            "service_seconds_per_job": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "x-absolute-tolerance": 1e-06
+            },
+            "arrival_jobs_per_second": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1000000000000.0,
+              "x-absolute-tolerance": 0.001
+            },
+            "unmargined_workers": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000,
+              "x-absolute-tolerance": 0.0001
+            },
+            "margin_fraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "x-absolute-tolerance": 1e-06
+            },
+            "with_margin_workers": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000,
+              "x-absolute-tolerance": 0.0001
+            },
+            "required_workers": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100000
+            },
+            "rounding": {
+              "type": "string",
+              "enum": [
+                "ceil-once-after-one-margin",
+                "ceil-before-margin",
+                "round-nearest"
+              ]
+            },
+            "input_basis": {
+              "type": "string",
+              "enum": [
+                "pooled-worker-service-spans",
+                "accepted-to-terminal-duration",
+                "configured-delay-only"
+              ]
+            }
+          }
+        },
+        "scaling_recommendation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "action",
+            "scope",
+            "evidence_ids"
+          ],
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "two-worker-pilot",
+                "admission-control-pilot",
+                "multi-region-platform-migration"
+              ]
+            },
+            "scope": {
+              "type": "string",
+              "enum": [
+                "bounded-local-pilot-before-production-decision",
+                "immediate-production-rollout"
+              ]
+            },
+            "evidence_ids": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "uniqueItems": true,
+              "x-order-independent": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "E51",
+                  "E52",
+                  "E53",
+                  "E54",
+                  "E55",
+                  "E56"
+                ]
+              }
+            }
+          }
+        },
+        "adr": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "context",
+            "decision",
+            "alternatives",
+            "consequences",
+            "action_trigger",
+            "rollback_condition",
+            "next_measurement"
+          ],
+          "properties": {
+            "context": {
+              "type": "string",
+              "enum": [
+                "projected-load-exceeds-one-worker-model",
+                "cloud-capacity-already-proven"
+              ]
+            },
+            "decision": {
+              "type": "string",
+              "enum": [
+                "two-worker-pilot",
+                "admission-control-pilot",
+                "multi-region-platform-migration"
+              ]
+            },
+            "alternatives": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "uniqueItems": true,
+              "x-order-independent": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "two-worker-pilot",
+                  "admission-control-pilot",
+                  "multi-region-platform-migration"
+                ]
+              }
+            },
+            "consequences": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1,
+              "uniqueItems": true,
+              "x-order-independent": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "duplicate-and-database-contention-risk",
+                  "admission-delay-and-rejection-risk",
+                  "production-capacity-guaranteed"
+                ]
+              }
+            },
+            "action_trigger": {
+              "type": "string",
+              "enum": [
+                "projected-utilization-above-one",
+                "actual-arrivals-above-one-worker-modeled-rate",
+                "local-api-p95-below-one-second"
+              ]
+            },
+            "rollback_condition": {
+              "type": "string",
+              "enum": [
+                "duplicate-side-effects-or-db-p95-over-200ms",
+                "rejection-over-1-percent-or-oldest-age-over-60s",
+                "never-rollback"
+              ]
+            },
+            "next_measurement": {
+              "type": "string",
+              "enum": [
+                "two-worker-completions-queue-age-db-p95-duplicates",
+                "admission-rejections-queue-age-completions",
+                "cloud-sla-from-local-runtime"
+              ]
+            }
+          }
+        }
       }
     }
   }

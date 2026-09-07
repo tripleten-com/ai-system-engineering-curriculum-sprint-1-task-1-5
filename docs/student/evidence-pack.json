@@ -1,0 +1,133 @@
+{
+  "task": "1.5",
+  "case_id": "capacity-audit-fixed-case",
+  "evidence_catalog": {
+    "E51": "Current Task 1.4 captured baseline worker-service span counts and sums",
+    "E52": "Historical 2-user capture retained only with original metric semantics",
+    "E53": "Authored workload scenario and decimal storage units",
+    "E54": "Authored operating policy: bounded reversible pilots and measurement gates",
+    "E55": "Source runtime/fidelity: sequential worker, deterministic-local provider, no production cloud evidence",
+    "E56": "Percentile arithmetic: marginal p95 values do not identify joint end-to-end p95"
+  },
+  "worker_service_capture": {
+    "provenance": {
+      "kind": "captured-local-runtime",
+      "captured_at_utc": "2026-09-06T18:03:33Z/2026-09-06T18:05:43Z",
+      "source_task": "1.4",
+      "source_materialization_baseline_commit": "66080dbc9b667ac771724bf73d6b20bf4e7148f1",
+      "source_sha256": {
+        "loadtest/locustfile.py": "b12d361570e536b507a65ead7dd7af5d29138d74ed972267bcbdf4c446df5a60",
+        "src/worker/runtime.py": "17f935ffbef661b166f65bdc59229624b641f5a1c9170a88fe70e93ede710aeb",
+        "src/worker/metrics.py": "a35f6bf34b3a1ff5b2ae7fddf7ac52a3af22cfe3bb22eab80d21d739f2ac4326",
+        "src/adapters/model/deterministic.py": "6c6220ef481c782c02f344151a178962e36cddb9276a888666816fc6ddcad84d",
+        "src/adapters/queue/redis_streams.py": "bf3aede4a4519bf873352201b033665545b9b0cb459e2f89ca97314ceff5133e",
+        "compose.yaml": "decdc24e1c06e07dc7ed043c7b8fae76631388fff874a62941cfb17449ef2128"
+      },
+      "environment": "Docker Desktop on shared Windows authoring host; sequential worker; deterministic local provider; concurrent host activity was not isolated",
+      "method": "Pinned Locust 20 users/spawn 5/run-time 30s, wait 0.05-0.15s; reset PostgreSQL and Redis and restart worker before each run. Observation window starts before Locust process launch and ends after process exit, so includes process startup/shutdown and differs from Locust internal Requests/s denominator. SQL counts accepted_at <= cutoff and COMPLETED updated_at <= cutoff; worker stopped after cutoff. Jaeger coldline.process_exception and model_provider.summarize spans entirely within the same window. Span counts agree with SQL completions in this capture. No Redis XLEN backlog measurement is asserted.",
+      "reproduction_commands": [
+        "locust -f loadtest/locustfile.py --headless --users 20 --spawn-rate 5 --run-time 30s --host http://localhost:8000 --csv run",
+        "SELECT state, accepted_at, updated_at FROM exceptions;",
+        "GET /api/traces?service=coldline-worker&start=<window-start-microseconds>&end=<window-end-microseconds>&limit=5000"
+      ],
+      "capture_limit": "Small shared-host sample, no controlled CPU profile, no measured production provider or cloud bottleneck. Rates are window averages, not maximum sustainable capacities."
+    },
+    "baseline_1": {
+      "worker_span_count": 93,
+      "worker_span_sum_seconds": 24.703857
+    },
+    "baseline_2": {
+      "worker_span_count": 106,
+      "worker_span_sum_seconds": 28.674758
+    },
+    "pooled_service_seconds_per_job": 0.268234,
+    "precision": "Pooled service duration rounded to six decimals is the supplied calculation input."
+  },
+  "historical_two_user_capture": {
+    "kind": "historical-repository-capture-not-recollected",
+    "profile": {
+      "users": 2,
+      "spawn_per_second": 2,
+      "duration_seconds": 30,
+      "wait_min_seconds": 1.0,
+      "wait_max_seconds": 1.4
+    },
+    "baseline_1": {
+      "api_acceptance_per_second": 1.53,
+      "retained_stream_entries": 44,
+      "accepted_to_terminal_sum_seconds": 13.356535,
+      "accepted_to_terminal_count": 44
+    },
+    "baseline_2": {
+      "api_acceptance_per_second": 1.56,
+      "retained_stream_entries": 45,
+      "accepted_to_terminal_sum_seconds": 12.859056,
+      "accepted_to_terminal_count": 45
+    },
+    "injected": {
+      "provider_added_delay_ms": 300,
+      "api_acceptance_per_second": 1.56,
+      "retained_stream_entries": 44
+    },
+    "limitations": "Original capture has no preserved common-cutoff unfinished-job counts or pure worker-service observations. XLEN is stream length, not backlog. Accepted-to-terminal sum/count includes queue wait even at light load. Capture host and timestamps were not retained. Do not use these data to size workers."
+  },
+  "planning_inputs": {
+    "kind": "authored-hypothetical-workload-not-10x-runtime-capture",
+    "baseline_sensor_readings_per_second": 100,
+    "growth_factor": 10,
+    "payload_bytes_per_reading": 500,
+    "exception_fraction": 0.012,
+    "retention_days": 7,
+    "seconds_per_hour": 3600,
+    "seconds_per_day": 86400,
+    "bytes_per_decimal_mb": 1000000,
+    "bytes_per_decimal_gb": 1000000000,
+    "margin_fraction": 0.3
+  },
+  "operating_policy": {
+    "kind": "authored-hypothetical-operating-policy-not-measured-production-slo",
+    "formula": "required_workers = ceil(arrival_jobs_per_second * service_seconds_per_job * (1 + 0.30)); apply margin once and ceiling once at the end. This planning model assumes sequential homogeneous workers and ignores scaling contention until measured.",
+    "approved_pilot_options": {
+      "two-worker-pilot": {
+        "trigger": "Projected offered load divided by one-worker modeled service capacity exceeds one.",
+        "rollback": "Any duplicate side effect or database p95 above 200 ms.",
+        "measure": "Completion rate, oldest outstanding age, database p95 and duplicates with two workers."
+      },
+      "admission-control-pilot": {
+        "trigger": "Observed arrival exceeds one-worker modeled service capacity.",
+        "rollback": "Rejected requests exceed 1% or oldest outstanding age exceeds 60 seconds.",
+        "measure": "Admission rejections, oldest outstanding age and completion rate."
+      }
+    },
+    "scope": "Recommend exactly one reversible local pilot. Compare both other named alternatives. No production deployment or multi-region platform migration is supported. Thresholds are hypothetical policy inputs, not observed metrics."
+  },
+  "claims": {
+    "C01": "The historical 0.29 seconds is pure worker service time.",
+    "C02": "Historical XLEN values 44 and 45 prove unfinished-job backlog.",
+    "C03": "1.53 API requests/second is completed-worker throughput and maximum capacity.",
+    "C04": "At the supplied 10x sensor rate, 500 bytes x 1000 readings/second gives 1800000000 MB/hour.",
+    "C05": "At 1000 readings/second and an exception fraction of 0.012, arrival is 120 jobs/second.",
+    "C06": "Seven days of raw readings require 43.2 GB total storage.",
+    "C07": "Required workers = ceil(ceil(arrival x service) x 1.3 x 1.3).",
+    "C08": "API p95 + worker p95 always equals end-to-end p95.",
+    "C09": "These local runs justify immediate multi-region Kubernetes, a service mesh and a managed multi-region stream.",
+    "C10": "The 10x arrival rate is an authored planning assumption, not a measured 10x run."
+  },
+  "fidelity": {
+    "local_model": "deterministic-local",
+    "worker_topology": "one sequential worker in supplied capture",
+    "percentile_rule": "Marginal p95 values alone do not determine the joint end-to-end p95; use correlated end-to-end observations."
+  },
+  "correction_choices": [
+    "use-accepted-to-terminal-duration",
+    "use-common-cutoff-outstanding-counts",
+    "separate-acceptance-completion-capacity",
+    "convert-bytes-to-decimal-mb",
+    "multiply-arrival-by-exception-fraction",
+    "multiply-daily-storage-by-retention-days",
+    "apply-margin-once-then-ceiling",
+    "measure-correlated-end-to-end-percentile",
+    "limit-to-reversible-local-pilot",
+    "retain-as-planning-assumption"
+  ]
+}
